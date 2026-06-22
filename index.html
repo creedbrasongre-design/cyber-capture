@@ -3,8 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cyber CTF — Blender GLB Robot</title>
+  <title>Cyber CTF — Blender GLB Robot FIXED</title>
   <link rel="stylesheet" href="style.css" />
+
+  <!-- This import map fixes the GLTFLoader problem in many browsers/GitHub Pages projects. -->
+  <script type="importmap">
+  {
+    "imports": {
+      "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+    }
+  }
+  </script>
 </head>
 <body>
   <div id="hud">
