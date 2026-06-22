@@ -130,13 +130,13 @@ function makeFlag(material, x, z) {
 }
 
 const redBase = makeBase(redMat, 0, 9);
-const blueBase = makeBase(blueMat, 0, -9);
+makeBase(blueMat, 0, -9);
 const blueFlag = makeFlag(blueMat, 0, -9);
 const carriedFlag = makeFlag(blueMat, 0, 0);
 carriedFlag.scale.set(0.55, 0.55, 0.55);
 carriedFlag.visible = false;
 
-// ---------- Fallback robot builder ----------
+// ---------- Backup robot builder ----------
 function addMesh(group, geometry, material, position, scale = [1, 1, 1], rotation = [0, 0, 0]) {
   const mesh = new THREE.Mesh(geometry, material);
   mesh.position.set(...position);
@@ -148,7 +148,7 @@ function addMesh(group, geometry, material, position, scale = [1, 1, 1], rotatio
   return mesh;
 }
 
-function createFallbackRobot() {
+function createBackupRobot() {
   const robot = new THREE.Group();
 
   addMesh(robot, new THREE.SphereGeometry(0.75, 32, 20), stoneMat, [0, 1.2, 0], [0.8, 0.95, 0.65]);
@@ -164,21 +164,16 @@ function createFallbackRobot() {
   addMesh(robot, new THREE.BoxGeometry(1.15, 0.08, 0.12), bronzeMat, [0, 0.78, 0.5]);
   addMesh(robot, new THREE.BoxGeometry(0.06, 0.55, 0.035), cyanMat, [0, 1.58, 0.64]);
 
-  // arms
   for (const side of [-1, 1]) {
     addMesh(robot, new THREE.SphereGeometry(0.23, 20, 12), stoneMat, [side * 0.82, 1.48, 0]);
     addMesh(robot, new THREE.CylinderGeometry(0.09, 0.09, 0.75, 12), stoneMat, [side * 1.02, 1.05, 0], [1, 1, 1], [0, 0, side * 0.35]);
     addMesh(robot, new THREE.BoxGeometry(0.28, 0.24, 0.22), stoneMat, [side * 1.25, 0.45, 0.02]);
-  }
 
-  // hover feet
-  for (const side of [-1, 1]) {
     addMesh(robot, new THREE.CylinderGeometry(0.095, 0.095, 0.58, 12), stoneMat, [side * 0.36, 0.48, 0.02]);
     addMesh(robot, new THREE.ConeGeometry(0.23, 0.45, 16), stoneMat, [side * 0.42, -0.15, 0.06], [1, 1, 1], [Math.PI, 0, 0]);
     addMesh(robot, new THREE.TorusGeometry(0.28, 0.025, 8, 32), cyanMat, [side * 0.42, -0.42, 0.06], [1, 1, 1], [Math.PI / 2, 0, 0]);
   }
 
-  // antenna
   addMesh(robot, new THREE.CylinderGeometry(0.035, 0.035, 0.55, 12), bronzeMat, [0.25, 2.95, 0.02], [1, 1, 1], [0.38, 0, 0]);
   addMesh(robot, new THREE.SphereGeometry(0.12, 20, 12), cyanMat, [0.34, 3.24, 0.08]);
 
@@ -190,23 +185,21 @@ let player = new THREE.Group();
 player.position.set(0, 0.55, 6.2);
 scene.add(player);
 
-// Show a code-built robot immediately so there is never an empty scene.
-let fallbackRobot = createFallbackRobot();
-fallbackRobot.rotation.y = Math.PI;
-player.add(fallbackRobot);
+// Show backup robot immediately.
+let backupRobot = createBackupRobot();
+backupRobot.rotation.y = Math.PI;
+player.add(backupRobot);
 
 let robotModel = null;
-let glbLoaded = false;
 
+// IMPORTANT: this looks for patch_robot.glb in the same root folder as index.html and game.js.
 const loader = new GLTFLoader();
 loader.load(
-  "assets/models/patch_robot.glb",
+  "./patch_robot.glb",
   (gltf) => {
-    glbLoaded = true;
-
-    if (fallbackRobot) {
-      player.remove(fallbackRobot);
-      fallbackRobot = null;
+    if (backupRobot) {
+      player.remove(backupRobot);
+      backupRobot = null;
     }
 
     robotModel = gltf.scene;
@@ -238,7 +231,7 @@ loader.load(
   undefined,
   (error) => {
     console.error("GLB load error:", error);
-    statusText.textContent = "Using backup robot. Check that assets/models/patch_robot.glb was uploaded.";
+    statusText.textContent = "Using backup robot. The GLB did not load.";
   }
 );
 
@@ -288,7 +281,7 @@ function updatePlayer() {
   player.position.y = 0.55 + Math.sin(t) * 0.07;
 
   if (robotModel) robotModel.rotation.z = Math.sin(t * 1.7) * 0.025;
-  if (fallbackRobot) fallbackRobot.rotation.z = Math.sin(t * 1.7) * 0.025;
+  if (backupRobot) backupRobot.rotation.z = Math.sin(t * 1.7) * 0.025;
 
   carriedFlag.position.set(player.position.x + 0.75, 0.8, player.position.z + 0.1);
   carriedFlag.rotation.y += 0.015;

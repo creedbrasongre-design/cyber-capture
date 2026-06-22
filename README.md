@@ -1,61 +1,24 @@
-# Cyber CTF — Blender/GLB Robot FIXED Version
+# Cyber CTF — Flat GitHub Fixed Version
 
-This is the fixed version.
+This version matches a flat GitHub upload where all main files are in the root folder.
 
-## What was fixed?
-
-The first Blender/GLB version could fail because the browser might not know how to resolve the Three.js `GLTFLoader` import.
-
-This version adds:
-
-- an `importmap` in `index.html`
-- safer Three.js imports
-- a backup robot made directly in code
-- a visible robot immediately, even if the `.glb` model fails to load
-
-## Important
-
-Do **not** open `index.html` directly as a local file if the model does not load.
-
-Use one of these:
-
-- GitHub Pages
-- VS Code Live Server
-- a local server
-
-## GitHub Pages steps
-
-1. Unzip this folder.
-2. Upload the contents to a GitHub repo.
-3. Make sure this file exists exactly here:
+## Required files in the root folder
 
 ```text
-assets/models/patch_robot.glb
+index.html
+style.css
+game.js
+patch_robot.glb
+README.md
 ```
 
-4. Go to Settings → Pages.
-5. Choose Deploy from branch.
-6. Choose `main` and `/root`.
-
-## Blender steps
-
-To open the model in Blender:
-
-1. Open Blender.
-2. File → Import → glTF 2.0.
-3. Select:
+The code loads the robot from:
 
 ```text
-assets/models/patch_robot.glb
+./patch_robot.glb
 ```
 
-4. Edit it.
-5. Export as `.glb`.
-6. Replace the old file in:
-
-```text
-assets/models/patch_robot.glb
-```
+That means `patch_robot.glb` must be in the same folder as `index.html`.
 
 ## Controls
 
@@ -63,5 +26,5 @@ assets/models/patch_robot.glb
 
 ## Goal
 
-Capture the blue flag and bring it back to the red base.
+Capture the blue flag and return it to the red base.
 Score 3 flags to win.
