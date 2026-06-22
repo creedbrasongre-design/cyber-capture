@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cyber Capture the Flag</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="hud">
+    <div class="title">Cyber Capture the Flag</div>
+    <div>Move: <b>WASD</b> or <b>Arrow Keys</b></div>
+    <div>Switch robot: <b>1</b> Tall · <b>2</b> Short · <b>3</b> Round · <b>4</b> Scout</div>
+    <div>Goal: grab the blue flag and return to the red base.</div>
+    <div id="status">Find the blue flag.</div>
+    <div id="score">Score: 0 / 3</div>
+  </div>
+
+  <canvas id="game"></canvas>
+
+  <script type="module" src="game.js"></script>
+</body>
+</html>

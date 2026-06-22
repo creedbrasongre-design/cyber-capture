@@ -1,0 +1,45 @@
+html, body {
+  margin: 0;
+  overflow: hidden;
+  background: #07101d;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+#game {
+  display: block;
+  width: 100vw;
+  height: 100vh;
+}
+
+#hud {
+  position: fixed;
+  top: 14px;
+  left: 14px;
+  z-index: 10;
+  color: white;
+  background: rgba(4, 10, 20, 0.75);
+  border: 1px solid rgba(120, 230, 255, 0.55);
+  box-shadow: 0 0 18px rgba(60, 220, 255, 0.25);
+  border-radius: 12px;
+  padding: 12px 14px;
+  line-height: 1.45;
+  max-width: 440px;
+  backdrop-filter: blur(5px);
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 4px;
+  color: #89f4ff;
+}
+
+#status {
+  margin-top: 6px;
+  color: #ffe28a;
+}
+
+#score {
+  color: #8dffb0;
+  font-weight: bold;
+}
