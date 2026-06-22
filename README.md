@@ -1,57 +1,51 @@
-# Cyber Capture the Flag Starter Game
+# Cyber CTF — Real 3D Robots
 
-This is a simple 3D browser game starter for GitHub Pages.
+This version upgrades the robot from a flat PNG sprite into a real Three.js 3D robot built from connected 3D parts.
 
-## What it does
+## What is different?
 
-- Uses Three.js for a 3D scene
-- Uses generated robot images as 2.5D sprites
-- Lets you switch between robot body shapes
-- Lets you capture the blue flag and return it to the red base
+The robot is now made of real 3D pieces:
+
+- 3D head
+- 3D torso
+- 3D arms
+- 3D legs / hover feet
+- glowing eyes
+- glowing chest core
+- glowing circuit lines
+- bronze trim
+- different robot body shapes
 
 ## Controls
 
 - Move: WASD or Arrow Keys
 - Switch robots:
-  - 1 = tall robot
-  - 2 = short robot
-  - 3 = round robot
-  - 4 = scout robot
+  - 1 = Tall robot
+  - 2 = Tank robot
+  - 3 = Round robot
+  - 4 = Scout robot
+
+## Goal
+
+Capture the blue flag and bring it back to the red base.
+
+Score 3 flags to win.
 
 ## How to put this on GitHub
 
 1. Create a new GitHub repository.
-2. Upload all files from this folder.
+2. Upload these files:
+   - `index.html`
+   - `style.css`
+   - `game.js`
+   - `README.md`
 3. Go to Settings → Pages.
-4. Under Branch, choose `main` and `/root`.
-5. Open the GitHub Pages link after it publishes.
+4. Choose Deploy from branch.
+5. Choose `main` and `/root`.
+6. Open the GitHub Pages link after it publishes.
 
-## Folder structure
+## Important note
 
-```text
-cyber_ctf_game_starter/
-  index.html
-  style.css
-  game.js
-  assets/
-    robots/
-      patch_tall.png
-      patch_short.png
-      patch_round.png
-      patch_scout.png
-    world/
-      cyber_floor.png
-      red_base.png
-      blue_base.png
-      blue_flag.png
-      red_flag.png
-```
+This is real 3D, but it is still built directly in code using Three.js.
 
-## Next ideas
-
-- Add scanner beams
-- Add enemy patrol robots
-- Add a timer
-- Add a start menu
-- Add sound effects
-- Add online multiplayer later
+Later, you could make an even better version by creating a full robot model in Blender and exporting it as a `.glb` file.
